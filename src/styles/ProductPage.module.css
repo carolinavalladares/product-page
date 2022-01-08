@@ -144,6 +144,10 @@
 
 /* Image */
 
+.images-button {
+  display: none;
+}
+
 .product-image {
   width: 444px;
   border-radius: 20px;
@@ -214,9 +218,9 @@
     max-width: none;
   }
   .product-image {
+    position: relative;
     display: block;
     width: 100%;
-
     margin: 0 auto;
     border-radius: 0;
   }
@@ -247,5 +251,31 @@
   .purchase-button {
     height: 56px;
     width: 100%;
+  }
+
+  .product-page__images {
+    position: relative;
+  }
+
+  .images-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 0;
+    outline: 0;
+    background-color: rgba(255, 255, 255, 0.8);
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    z-index: 2;
+  }
+  .prev-button {
+    left: 15px;
+  }
+  .next-button {
+    right: 15px;
   }
 }
