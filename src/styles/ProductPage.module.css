@@ -1,0 +1,251 @@
+.product-page {
+  margin-top: 90px;
+  padding-bottom: 87px;
+}
+.product-page__wrapper {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  max-width: 1016px;
+  margin: 0 auto;
+  gap: 126px;
+}
+
+/* Product Info */
+
+.brand-name {
+  color: var(--orange);
+  font-size: 14px;
+  text-transform: uppercase;
+  margin-bottom: 30px;
+}
+.product-name {
+  max-width: 395px;
+  font-size: 40px;
+  margin-bottom: 38px;
+}
+.product-description {
+  max-width: 430px;
+  color: var(--grayish-blue-500);
+  margin-bottom: 40px;
+  line-height: 25px;
+}
+
+/* Product Price */
+
+.product-price {
+  margin-bottom: 40px;
+}
+
+.current-price-wrapper {
+  display: flex;
+  align-items: center;
+  gap: 18px;
+  margin-bottom: 15px;
+}
+
+.current-price {
+  font-size: 25px;
+}
+
+.discount-percent {
+  color: var(--orange);
+  font-weight: 700;
+  background-color: var(--pale-orange);
+  padding: 4px 7px;
+  border-radius: 5px;
+}
+.previous-price {
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--grayish-blue-300);
+  text-decoration: line-through;
+}
+
+/* Purchase Options */
+
+.purchase-options {
+  height: 55px;
+  display: flex;
+  gap: 15px;
+}
+
+/* Amount input */
+
+.amount-input-wrapper {
+  height: 100%;
+  display: flex;
+  border-radius: 10px;
+  overflow: hidden;
+}
+
+.amount-button {
+  border: 0;
+  outline: 0;
+  background-color: var(--grayish-blue-100);
+  height: 100%;
+  padding: 0 17px;
+
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+}
+
+.amount-button:hover {
+  background-color: var(--pale-orange);
+}
+
+.amount-input {
+  border: 0;
+  outline: 0;
+  background-color: var(--grayish-blue-100);
+  width: 80px;
+  font-size: 16px;
+  font-weight: 700;
+  text-align: center;
+}
+
+/* Hide number input arrows  */
+.amount-input::-webkit-outer-spin-button,
+.amount-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.amount-input[type="number"] {
+  -moz-appearance: textfield;
+}
+
+.purchase-button {
+  border: 0;
+  outline: 0;
+  border-radius: 10px;
+  width: 272px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: var(--orange);
+  color: var(--white);
+  cursor: pointer;
+  transition: all 0.2s linear;
+}
+.purchase-button:hover {
+  filter: hue-rotate(10deg);
+}
+
+.purchase-button__cart-icon {
+  width: 18px;
+  margin-right: 16px;
+  filter: brightness(0) saturate(100%) invert(100%) sepia(0%) saturate(0%)
+    hue-rotate(216deg) brightness(112%) contrast(101%);
+}
+
+/* Image */
+
+.product-image {
+  width: 444px;
+  border-radius: 20px;
+  margin-bottom: 30px;
+}
+
+.image-preview-list {
+  display: flex;
+  align-items: center;
+  gap: 30px;
+  list-style: none;
+}
+
+.image-preview-list-item {
+  position: relative;
+  width: 90px;
+  height: 90px;
+  border-radius: 10px;
+  cursor: pointer;
+  overflow: hidden;
+}
+
+.image-preview {
+  background-color: var(--white);
+  width: 100%;
+}
+.image-preview-list-item.active {
+  border: 3px solid var(--orange);
+  background-blend-mode: multiply;
+}
+
+.image-preview-overlay {
+  position: absolute;
+  inset: 0;
+  background-color: var(--white);
+  opacity: 0.7;
+}
+
+@media (max-width: 1200px) {
+  .product-page__wrapper {
+    gap: 26px;
+    justify-content: center;
+  }
+}
+
+@media (max-width: 992px) {
+  .product-page {
+    margin-top: 0;
+  }
+  .product-page__wrapper {
+    flex-direction: column;
+    align-items: stretch;
+    justify-content: stretch;
+    max-width: 768px;
+  }
+
+  .product-page__info {
+    margin: 0 15px;
+  }
+  .brand-name {
+    margin-bottom: 20px;
+  }
+  .product-name {
+    margin-bottom: 30px;
+    font-size: 30px;
+  }
+  .product-description {
+    max-width: none;
+  }
+  .product-image {
+    display: block;
+    width: 100%;
+
+    margin: 0 auto;
+    border-radius: 0;
+  }
+  .image-preview-list {
+    display: none;
+  }
+
+  .product-price {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 430px;
+    margin: 0 auto 30px;
+  }
+
+  .purchase-options {
+    flex-direction: column;
+    height: auto;
+  }
+
+  .amount-input-wrapper {
+    height: 56px;
+    width: 100%;
+  }
+  .amount-input {
+    flex: 1;
+  }
+  .purchase-button {
+    height: 56px;
+    width: 100%;
+  }
+}

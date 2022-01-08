@@ -1,14 +1,12 @@
-.page-header {
-}
 .page-header__wrapper {
   display: grid;
   grid-template-columns: 1fr 3fr 1fr;
   align-items: center;
-  width: 100%;
   max-width: 1108px;
   margin: 0 auto;
   border-bottom: 1px solid var(--grayish-blue-300);
   padding: 28px 15px 32px;
+  width: 100%;
 }
 
 .page-header__logo {
@@ -36,6 +34,7 @@
   letter-spacing: 0.05em;
   font-size: 16px;
   color: var(--grayish-blue-500);
+  transition: color 0.1s linear;
 }
 .page-header__menu-item-link:hover {
   color: var(--orange);
@@ -72,7 +71,7 @@
   .page-header__wrapper {
     padding: 20px 24px;
     grid-template-columns: 0.5fr 3fr 1fr;
-    border: 0;
+    width: 100%;
   }
 
   .menu-button-wrapper {
@@ -140,5 +139,10 @@
 
   .user-items__user-image {
     width: 25px;
+  }
+}
+@media (max-width: 992px) {
+  .page-header__wrapper {
+    border: 0;
   }
 }

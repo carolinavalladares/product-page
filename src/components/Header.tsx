@@ -12,6 +12,7 @@ const Header = () => {
   const closeMenu = () => {
     setMenuOpen(false);
   };
+
   return (
     <header className={style["page-header"]}>
       <div className={style["page-header__wrapper"]}>
