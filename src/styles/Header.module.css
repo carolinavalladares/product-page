@@ -1,0 +1,144 @@
+.page-header {
+}
+.page-header__wrapper {
+  display: grid;
+  grid-template-columns: 1fr 3fr 1fr;
+  align-items: center;
+  width: 100%;
+  max-width: 1108px;
+  margin: 0 auto;
+  border-bottom: 1px solid var(--grayish-blue-300);
+  padding: 28px 15px 32px;
+}
+
+.page-header__logo {
+  padding-right: 18px;
+}
+
+.menu-button-wrapper {
+  display: none;
+}
+
+/* Menu */
+
+.close-menu-button {
+  display: none;
+}
+
+.page-header__menu-list {
+  list-style: none;
+  display: flex;
+  gap: 35px;
+}
+
+.page-header__menu-item-link {
+  text-decoration: none;
+  letter-spacing: 0.05em;
+  font-size: 16px;
+  color: var(--grayish-blue-500);
+}
+.page-header__menu-item-link:hover {
+  color: var(--orange);
+}
+
+/* User Items */
+
+.page-header__user-items {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 40px;
+}
+
+.user-items__cart-button {
+  border: 0;
+  padding: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background-color: transparent;
+  cursor: pointer;
+  transition: background-color 0.2s linear;
+}
+.user-items__cart-button:hover {
+  background-color: var(--pale-orange);
+}
+
+.user-items__user-image {
+  width: 50px;
+}
+
+@media (max-width: 778px) {
+  .page-header__wrapper {
+    padding: 20px 24px;
+    grid-template-columns: 0.5fr 3fr 1fr;
+    border: 0;
+  }
+
+  .menu-button-wrapper {
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+  }
+
+  .menu-button {
+    background-color: transparent;
+    border: 0;
+  }
+  .menu-hamburger {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    cursor: pointer;
+  }
+
+  .menu-hamburger-line {
+    height: 3px;
+    background-color: var(--grayish-blue-500);
+  }
+
+  .page-header__menu {
+    position: fixed;
+    height: 100%;
+    width: 100%;
+    max-width: 250px;
+    top: 0;
+    left: -250px;
+    background-color: var(--white);
+    display: flex;
+    flex-direction: column;
+    gap: 60px;
+    padding: 26px;
+    transition: left 0.2s linear;
+  }
+
+  .page-header__menu.open {
+    left: 0;
+  }
+
+  .close-menu-button {
+    display: block;
+    border: 0;
+    padding: 0;
+    background-color: transparent;
+    align-self: flex-start;
+  }
+  .page-header__menu-list {
+    flex-direction: column;
+  }
+
+  .page-header__menu-item-link {
+    color: var(--dark-blue);
+    font-weight: 700;
+  }
+
+  .page-header__user-items {
+    gap: 20px;
+  }
+
+  .user-items__user-image {
+    width: 25px;
+  }
+}
