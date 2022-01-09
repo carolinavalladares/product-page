@@ -1,0 +1,54 @@
+.lightbox {
+  background-color: var(--black-opacity);
+  position: fixed;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.lightbox-content-wrapper {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+}
+
+.close-lightbox-button {
+  align-self: flex-end;
+  border: 0;
+  outline: 0;
+  background-color: transparent;
+  margin-bottom: 27px;
+  cursor: pointer;
+}
+
+.close-lightbox-button img {
+  transform: scale(1.4);
+  filter: brightness(0) saturate(100%) invert(100%) sepia(100%) saturate(0%)
+    hue-rotate(279deg) brightness(103%) contrast(102%);
+}
+
+.images-button {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 60px;
+  width: 60px;
+  border-radius: 50%;
+  border: 0;
+  outline: 0;
+  background-color: var(--white);
+  cursor: pointer;
+}
+
+.prev-button {
+  left: -30px;
+}
+
+.next-button {
+  right: -30px;
+}

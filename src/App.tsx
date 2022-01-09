@@ -53,6 +53,11 @@ const initialProduct: IProduct = {
 
 function App() {
   const [productAmount, setProductAmount] = useState<number>(0);
+  const [currentImage, setCurrentImage] = useState<image>({
+    title: "",
+    main: "",
+    preview: "",
+  });
   const [product, setProduct] = useState<IProduct>(initialProduct);
   const [itemsInCart, setItemsInCart] = useState<IItemInCart[]>([]);
 
@@ -76,6 +81,8 @@ function App() {
         product={product}
         itemsInCart={itemsInCart}
         setItemsInCart={setItemsInCart}
+        currentImage={currentImage}
+        setCurrentImage={setCurrentImage}
       />
     </div>
   );

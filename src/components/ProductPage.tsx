@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from "react";
 import style from "../styles/ProductPage.module.css";
+import ImageCarousel from "./ImageCarousel";
+import Overlay from "./Lightbox";
 
 interface IProduct {
   title: string;
@@ -37,6 +39,8 @@ interface ProductPageProps {
   product: IProduct;
   itemsInCart: IItemInCart[];
   setItemsInCart: React.Dispatch<React.SetStateAction<IItemInCart[]>>;
+  currentImage: image;
+  setCurrentImage: React.Dispatch<React.SetStateAction<image>>;
 }
 
 const ProductPage = ({
@@ -45,12 +49,10 @@ const ProductPage = ({
   product,
   setItemsInCart,
   itemsInCart,
+  currentImage,
+  setCurrentImage,
 }: ProductPageProps) => {
-  const [currentImage, setCurrentImage] = useState<image>({
-    title: "",
-    main: "",
-    preview: "",
-  });
+  const [lightboxActive, setLightboxActive] = useState<boolean>(false);
 
   useEffect(() => {
     setCurrentImage(product.images[0]);
@@ -65,36 +67,6 @@ const ProductPage = ({
 
   const increaseAmount = () => {
     setProductAmount(productAmount + 1);
-  };
-
-  const setImage = (image: image) => {
-    setCurrentImage(image);
-  };
-
-  const prevImage = () => {
-    let prevImage: image;
-    const currentImageIndex = product.images.indexOf(currentImage);
-    const lastImage = product.images[product.images.length - 1];
-    if (currentImageIndex === 0) {
-      prevImage = lastImage;
-    } else {
-      prevImage = product.images[currentImageIndex - 1];
-    }
-
-    setCurrentImage(prevImage);
-  };
-
-  const nextImage = () => {
-    let nextImage: image;
-    const currentImageIndex = product.images.indexOf(currentImage);
-    const firstImage = product.images[0];
-    if (currentImageIndex === product.images.length - 1) {
-      nextImage = firstImage;
-    } else {
-      nextImage = product.images[currentImageIndex + 1];
-    }
-
-    setCurrentImage(nextImage);
   };
 
   const addProductToCart = () => {
@@ -112,52 +84,26 @@ const ProductPage = ({
 
   return (
     <div className={style["product-page"]}>
+      {lightboxActive ? (
+        <Overlay
+          product={product}
+          currentImage={currentImage}
+          setCurrentImage={setCurrentImage}
+          lightboxActive={lightboxActive}
+          setLightboxActive={setLightboxActive}
+        />
+      ) : null}
+
       <div className={style["product-page__wrapper"]}>
         <div className={style["product-page__images"]}>
-          <button
-            onClick={prevImage}
-            className={`${style["images-button"]} ${style["prev-button"]}`}
-          >
-            <img src="./icons/icon-previous.svg" alt="previous" />
-          </button>
-
-          <img
-            className={style["product-image"]}
-            src={currentImage.main}
-            alt=""
+          <ImageCarousel
+            type="content"
+            product={product}
+            setCurrentImage={setCurrentImage}
+            currentImage={currentImage}
+            lightboxActive={lightboxActive}
+            setLightboxActive={setLightboxActive}
           />
-
-          <button
-            onClick={nextImage}
-            className={`${style["images-button"]} ${style["next-button"]}`}
-          >
-            <img src="./icons/icon-next.svg" alt="next" />
-          </button>
-
-          <ul className={style["image-preview-list"]}>
-            {product.images.map((image) => (
-              <li
-                className={`${image === currentImage ? style["active"] : ""} ${
-                  style["image-preview-list-item"]
-                }`}
-                key={product.images.indexOf(image)}
-                onClick={() => {
-                  setImage(image);
-                }}
-              >
-                <img
-                  className={`${style["image-preview"]} `}
-                  src={image.preview}
-                  alt="product-thumbnail"
-                />
-                {image === currentImage ? (
-                  <div className={style["image-preview-overlay"]}></div>
-                ) : (
-                  ""
-                )}
-              </li>
-            ))}
-          </ul>
         </div>
 
         <div className={style["product-page__info"]}>
