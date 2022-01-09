@@ -52,7 +52,7 @@ const initialProduct: IProduct = {
 };
 
 function App() {
-  const [productAmount, setProductAmount] = useState<number>(0);
+  const [productAmount, setProductAmount] = useState<number>(1);
   const [currentImage, setCurrentImage] = useState<image>({
     title: "",
     main: "",
