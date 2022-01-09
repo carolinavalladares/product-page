@@ -20,6 +20,19 @@ type image = {
   preview: string;
 };
 
+interface IItemInCart {
+  title: string;
+  brand: string;
+  description: string;
+  price: {
+    current: string;
+    previous: string;
+    discountPercentage: string;
+  };
+  images: image[];
+  amount: number;
+}
+
 const initialProduct: IProduct = {
   title: "",
   brand: "",
@@ -41,6 +54,7 @@ const initialProduct: IProduct = {
 function App() {
   const [productAmount, setProductAmount] = useState<number>(0);
   const [product, setProduct] = useState<IProduct>(initialProduct);
+  const [itemsInCart, setItemsInCart] = useState<IItemInCart[]>([]);
 
   const fetchProduct = async () => {
     const response = await fetch("./product.json");
@@ -54,11 +68,14 @@ function App() {
 
   return (
     <div className="App">
-      <Header />
+      <Header itemsInCart={itemsInCart} setItemsInCart={setItemsInCart} />
+
       <ProductPage
         productAmount={productAmount}
         setProductAmount={setProductAmount}
         product={product}
+        itemsInCart={itemsInCart}
+        setItemsInCart={setItemsInCart}
       />
     </div>
   );

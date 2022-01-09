@@ -89,11 +89,11 @@
   display: flex;
   align-items: center;
   cursor: pointer;
-  transition: background-color 0.2s linear;
+  transition: opacity 0.2s linear;
 }
 
 .amount-button:hover {
-  background-color: var(--pale-orange);
+  opacity: 0.7;
 }
 
 .amount-input {
@@ -132,7 +132,7 @@
   transition: all 0.2s linear;
 }
 .purchase-button:hover {
-  filter: hue-rotate(10deg);
+  opacity: 0.7;
 }
 
 .purchase-button__cart-icon {
@@ -168,15 +168,23 @@
   border-radius: 10px;
   cursor: pointer;
   overflow: hidden;
+  transition: transform 0.2s linear;
 }
 
-.image-preview {
-  background-color: var(--white);
-  width: 100%;
-}
 .image-preview-list-item.active {
   border: 3px solid var(--orange);
   background-blend-mode: multiply;
+}
+.image-preview-list-item:hover {
+  transform: scale(0.95);
+}
+.image-preview {
+  background-color: var(--white);
+  width: 100%;
+  transition: opacity 0.2s linear;
+}
+.image-preview-list-item:hover > .image-preview {
+  opacity: 0.8;
 }
 
 .image-preview-overlay {

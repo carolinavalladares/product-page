@@ -1,9 +1,47 @@
 import React, { useState } from "react";
+import MiniCart from "./MiniCart";
 
 import style from "../styles/Header.module.css";
 
-const Header = () => {
+interface IProduct {
+  title: string;
+  brand: string;
+  description: string;
+  price: {
+    current: string;
+    previous: string;
+    discountPercentage: string;
+  };
+  images: image[];
+}
+
+type image = {
+  title: string;
+  main: string;
+  preview: string;
+};
+
+interface IItemInCart {
+  title: string;
+  brand: string;
+  description: string;
+  price: {
+    current: string;
+    previous: string;
+    discountPercentage: string;
+  };
+  images: image[];
+  amount: number;
+}
+interface HeaderProps {
+  itemsInCart: IItemInCart[];
+
+  setItemsInCart: React.Dispatch<React.SetStateAction<IItemInCart[]>>;
+}
+
+const Header = ({ itemsInCart, setItemsInCart }: HeaderProps) => {
   const [menuOpen, setMenuOpen] = useState<boolean>(false);
+  const [cartIsOpen, setCartIsOpen] = useState<boolean>(false);
 
   const openMenu = () => {
     setMenuOpen(true);
@@ -11,6 +49,10 @@ const Header = () => {
 
   const closeMenu = () => {
     setMenuOpen(false);
+  };
+
+  const toggleCart = () => {
+    setCartIsOpen(!cartIsOpen);
   };
 
   return (
@@ -65,8 +107,21 @@ const Header = () => {
         </nav>
 
         <div className={style["page-header__user-items"]}>
-          <button className={style["user-items__cart-button"]} title="cart">
-            <img src="./icons/icon-cart.svg" alt="" />
+          <button
+            onClick={toggleCart}
+            className={style["user-items__cart-button"]}
+            title="cart"
+          >
+            <img
+              className={style["cart-icon"]}
+              src="./icons/icon-cart.svg"
+              alt=""
+            />
+            {itemsInCart.length > 0 ? (
+              <span className={style["cart-button__amount-items"]}>
+                {itemsInCart.length}
+              </span>
+            ) : null}
           </button>
           <a href="#">
             <img
@@ -76,6 +131,11 @@ const Header = () => {
             />
           </a>
         </div>
+        <MiniCart
+          itemsInCart={itemsInCart}
+          setItemsInCart={setItemsInCart}
+          cartIsOpen={cartIsOpen}
+        />
       </div>
     </header>
   );

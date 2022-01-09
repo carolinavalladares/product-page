@@ -18,17 +18,33 @@ type image = {
   main: string;
   preview: string;
 };
+interface IItemInCart {
+  title: string;
+  brand: string;
+  description: string;
+  price: {
+    current: string;
+    previous: string;
+    discountPercentage: string;
+  };
+  images: image[];
+  amount: number;
+}
 
 interface ProductPageProps {
   productAmount: number;
   setProductAmount: React.Dispatch<React.SetStateAction<number>>;
   product: IProduct;
+  itemsInCart: IItemInCart[];
+  setItemsInCart: React.Dispatch<React.SetStateAction<IItemInCart[]>>;
 }
 
 const ProductPage = ({
   productAmount,
   setProductAmount,
   product,
+  setItemsInCart,
+  itemsInCart,
 }: ProductPageProps) => {
   const [currentImage, setCurrentImage] = useState<image>({
     title: "",
@@ -81,6 +97,19 @@ const ProductPage = ({
     setCurrentImage(nextImage);
   };
 
+  const addProductToCart = () => {
+    const currentProduct = {
+      ...product,
+      amount: productAmount,
+    };
+    if (
+      !itemsInCart.find((item) => currentProduct.title === item.title) &&
+      productAmount !== 0
+    ) {
+      setItemsInCart([...itemsInCart, currentProduct]);
+    }
+  };
+
   return (
     <div className={style["product-page"]}>
       <div className={style["product-page__wrapper"]}>
@@ -111,11 +140,12 @@ const ProductPage = ({
                 className={`${image === currentImage ? style["active"] : ""} ${
                   style["image-preview-list-item"]
                 }`}
+                key={product.images.indexOf(image)}
+                onClick={() => {
+                  setImage(image);
+                }}
               >
                 <img
-                  onClick={() => {
-                    setImage(image);
-                  }}
                   className={`${style["image-preview"]} `}
                   src={image.preview}
                   alt="product-thumbnail"
@@ -136,16 +166,16 @@ const ProductPage = ({
           <p className={style["product-description"]}>{product.description}</p>
           <div className={style["product-price"]}>
             <div className={style["current-price-wrapper"]}>
-              <h2
-                className={style["current-price"]}
-              >{`$${product.price.current}.00`}</h2>
+              <h2 className={style["current-price"]}>{`$${parseFloat(
+                product.price.current
+              ).toFixed(2)}`}</h2>
               <p
                 className={style["discount-percent"]}
               >{`${product.price.discountPercentage}%`}</p>
             </div>
-            <p
-              className={style["previous-price"]}
-            >{`$${product.price.previous}.00`}</p>
+            <p className={style["previous-price"]}>{`$${parseFloat(
+              product.price.previous
+            ).toFixed(2)}`}</p>
           </div>
           <div className={style["purchase-options"]}>
             <div className={style["amount-input-wrapper"]}>
@@ -159,6 +189,7 @@ const ProductPage = ({
                 className={style["amount-input"]}
                 type="number"
                 value={productAmount}
+                readOnly
               />
               <button
                 className={`${style["amount-button"]} ${style["plus-button"]}`}
@@ -167,7 +198,10 @@ const ProductPage = ({
                 <img src="./icons/icon-plus.svg" alt="plus" />
               </button>
             </div>
-            <button className={style["purchase-button"]}>
+            <button
+              onClick={addProductToCart}
+              className={style["purchase-button"]}
+            >
               <img
                 className={style["purchase-button__cart-icon"]}
                 src="./icons/icon-cart.svg"
